@@ -1,6 +1,12 @@
 import $ from "jquery";
 import "./requests.js";
-import { indexTasks, postTask, deleteTask } from "./requests.js";
+import {
+  indexTasks,
+  postTask,
+  deleteTask,
+  markActive,
+  markCompleted,
+} from "./requests.js";
 
 function getLatestTask() {
   indexTasks(function (response) {
@@ -17,18 +23,27 @@ function getLatestTask() {
         "' class='remove-button'>Remove</button>\
         <input type='checkbox' id='checkbox_" +
         task.id +
-        "' class='task-checkbox' onchange='handleCheckboxChange(" +
+        "' class='task-checkbox' data-id='" +
         task.id +
-        ")'>\
+        "'>\
         </div>"
       );
     });
     $("#tasks").html(htmlString);
 
-    $("#tasks").on("click", ".remove-button", function () {
-      var taskId = $(this).data("id");
-      handleRemoveClick(taskId);
-    });
+    $("#tasks")
+      .off("change", ".task-checkbox")
+      .on("change", ".task-checkbox", function () {
+        var taskId = $(this).data("id");
+        handleCheckboxChange(taskId);
+      });
+
+    $("#tasks")
+      .off("click", ".remove-button")
+      .on("click", ".remove-button", function () {
+        var taskId = $(this).data("id");
+        handleRemoveClick(taskId);
+      });
   });
 }
 
@@ -50,6 +65,13 @@ $(document).on("click", "#addTaskButton", function () {
   console.log("clicked");
   handleAddTaskClick();
 });
+
+function handleCheckboxChange(taskId) {
+  markCompleted(taskId, function () {
+    getLatestTask();
+    console.log("complete");
+  });
+}
 
 $(function () {
   getLatestTask();

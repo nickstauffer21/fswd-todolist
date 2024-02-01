@@ -45,20 +45,24 @@ export var deleteTask = function (id) {
   $.ajax(request);
 };
 
-export var markCompleted = function (id) {
+export var markCompleted = function (id, successCB, errorCB) {
   var request = {
     type: "PUT",
-    url: `api/tasks/${id}?api_key=1`,
+    url: `api/tasks/${id}/mark_complete?api_key=1`,
+    data: { completed: false },
     success: successCB,
     error: errorCB,
   };
+  $.ajax(request);
 };
 
-export var markActive = function (id) {
+export var markActive = function (id, successCB, errorCB) {
   var request = {
     type: "PUT",
-    url: `api/tasks/${id}?api_key=1`,
+    url: `api/tasks/${id}/mark_active?api_key=1`,
+    data: { completed: true },
     success: successCB,
     error: errorCB,
   };
+  $.ajax(request);
 };
