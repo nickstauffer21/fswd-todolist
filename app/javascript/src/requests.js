@@ -18,7 +18,7 @@ export var indexTasks = function (successCB, errorCB) {
 
 indexTasks();
 
-export var postTask = function (content) {
+export var postTask = function (content, successCB, errorCB) {
   var request = {
     type: "POST",
     url: "api/tasks?api_key=1",
@@ -30,7 +30,6 @@ export var postTask = function (content) {
     success: successCB,
     error: errorCB,
   };
-
   $.ajax(request);
 };
 
@@ -40,7 +39,7 @@ export var deleteTask = function (id) {
     url: `api/tasks/${id}?api_key=1`,
     success: function (data) {
       console.log("task deleted", data);
-      $("#task_" + id).remove();
+      $(".task[data-id='" + id + "']").remove();
     },
   };
   $.ajax(request);
