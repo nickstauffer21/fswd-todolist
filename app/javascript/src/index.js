@@ -10,6 +10,8 @@ import {
 
 function getLatestTask() {
   indexTasks(function (response) {
+    console.log(response);
+
     var htmlString = response.tasks.map(function (task) {
       return (
         "<div class='col-12 mb-3 p-2 border rounded task' data-id='" +
@@ -25,7 +27,9 @@ function getLatestTask() {
         task.id +
         "' class='task-checkbox' data-id='" +
         task.id +
-        "'>\
+        "'" +
+        (task.completed ? " checked" : "") +
+        ">\
         </div>"
       );
     });
@@ -35,7 +39,8 @@ function getLatestTask() {
       .off("change", ".task-checkbox")
       .on("change", ".task-checkbox", function () {
         var taskId = $(this).data("id");
-        handleCheckboxChange(taskId);
+        var goToChecked = $(this).prop("checked");
+        handleCheckboxChange(taskId, goToChecked);
       });
 
     $("#tasks")
@@ -66,11 +71,20 @@ $(document).on("click", "#addTaskButton", function () {
   handleAddTaskClick();
 });
 
-function handleCheckboxChange(taskId) {
-  markCompleted(taskId, function () {
-    getLatestTask();
-    console.log("complete");
-  });
+function handleCheckboxChange(taskId, goToChecked) {
+  console.log(taskId, goToChecked);
+
+  if (goToChecked) {
+    markCompleted(taskId, function () {
+      getLatestTask();
+      console.log("complete");
+    });
+  } else {
+    markActive(taskId, function () {
+      getLatestTask();
+      console.log("active");
+    });
+  }
 }
 
 $(function () {

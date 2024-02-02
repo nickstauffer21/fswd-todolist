@@ -16,8 +16,6 @@ export var indexTasks = function (successCB, errorCB) {
   $.ajax(request);
 };
 
-indexTasks();
-
 export var postTask = function (content, successCB, errorCB) {
   var request = {
     type: "POST",
@@ -48,8 +46,8 @@ export var deleteTask = function (id) {
 export var markCompleted = function (id, successCB, errorCB) {
   var request = {
     type: "PUT",
-    url: `api/tasks/${id}/mark_complete?api_key=1`,
-    data: { completed: false },
+    url: `api/tasks/${id}/mark_complete`,
+    data: { api_key: 1 },
     success: successCB,
     error: errorCB,
   };
@@ -59,8 +57,8 @@ export var markCompleted = function (id, successCB, errorCB) {
 export var markActive = function (id, successCB, errorCB) {
   var request = {
     type: "PUT",
-    url: `api/tasks/${id}/mark_active?api_key=1`,
-    data: { completed: true },
+    url: `api/tasks/${id}/mark_active`,
+    data: { api_key: 1 },
     success: successCB,
     error: errorCB,
   };
