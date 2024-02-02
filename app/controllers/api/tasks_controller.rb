@@ -41,7 +41,7 @@ module Api
       @task = user.tasks.find_by(id: params[:id])
 
       return render 'not_found', status: :not_found unless @task
-      return render 'bad_request', status: :bad_request unless @task.update(task_params)
+      return render 'bad_request', status: :bad_request unless @task.update!(task_params)
 
       render 'show', status: :ok
     end
@@ -51,7 +51,7 @@ module Api
       @task = user.tasks.find_by(id: params[:id])
 
       return render 'not_found', status: :not_found unless @task
-      return render 'bad_request', status: :bad_request unless @task.update(completed: true)
+      return render 'bad_request', status: :bad_request unless @task.update!(completed: true)
 
       render 'show', status: :ok
     end
@@ -61,7 +61,7 @@ module Api
       @task = user.tasks.find_by(id: params[:id])
 
       return render 'not_found', status: :not_found unless @task
-      return render 'bad_request', status: :bad_request unless @task.update(completed: false)
+      return render 'bad_request', status: :bad_request unless @task.update!(completed: false)
 
       render 'show', status: :ok
     end
