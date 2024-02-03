@@ -1,20 +1,48 @@
-.user-input {
-  align-items: center;
+.form {
+  display: flex;
+  justify-content: center;
 }
+
 #tasks {
   margin: 0 40px 20px 40px;
-  padding: 30px 200px 0 200px;
+  padding: 30px 100px 0 100px;
 }
 
 .remove-button {
-  float: inline-end;
   background-color: #007bff;
   color: #ffffff;
-  padding: 5px;
   border: none;
   cursor: pointer;
+  display: inline-block;
+}
+
+.task-content.completed-task {
+  color: #888282;
+  text-decoration: line-through;
+}
+
+.task {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  border: 1px solid red !important;
+}
+
+.task-content {
+  inline-size: 230px;
+  white-space: normal;
+  overflow-wrap: break-word;
 }
 
 .task-checkbox {
-  float: inline-end;
+  width: 20px;
+  margin-right: 10px;
+}
+
+.completion-status {
+  padding-left: 60px;
+  width: 60px;
+  color: red;
+  font-weight: 600;
 }

@@ -17,12 +17,14 @@ function getLatestTask() {
         "<div class='col-12 mb-3 p-2 border rounded task' data-id='" +
         task.id +
         "'> \
-        " +
+        <div class='task-content" +
+        (task.completed ? " completed-task" : "") +
+        "'>" +
         task.content +
-        "\
-        <button data-id='" +
-        task.id +
-        "' class='remove-button'>Remove</button>\
+        "</div>\
+        <div class='completion-status'>" +
+        (task.completed ? "" : "Incomplete") +
+        "</div>\
         <input type='checkbox' id='checkbox_" +
         task.id +
         "' class='task-checkbox' data-id='" +
@@ -30,6 +32,9 @@ function getLatestTask() {
         "'" +
         (task.completed ? " checked" : "") +
         ">\
+        <button data-id='" +
+        task.id +
+        "' class='remove-button'>Remove</button>\
         </div>"
       );
     });
@@ -73,16 +78,21 @@ $(document).on("click", "#addTaskButton", function () {
 
 function handleCheckboxChange(taskId, goToChecked) {
   console.log(taskId, goToChecked);
+  var $taskContent = $(".task[data-id='" + taskId + "'] .task-content");
 
   if (goToChecked) {
     markCompleted(taskId, function () {
       getLatestTask();
       console.log("complete");
+      $taskContent.addClass("completed-task");
+      console.log("Task element after adding class:", $taskContent);
     });
   } else {
     markActive(taskId, function () {
       getLatestTask();
       console.log("active");
+      $taskContent.removeClass("completed-task");
+      console.log("active", $taskContent);
     });
   }
 }
