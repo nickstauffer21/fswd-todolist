@@ -1,6 +1,12 @@
-.form {
+.container {
+  width: 100%;
+}
+
+.user-input {
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  padding-right: 20px;
+  margin-left: 150px;
 }
 
 #tasks {
@@ -9,11 +15,12 @@
 }
 
 .remove-button {
-  background-color: #007bff;
+  background-color: rgb(255, 0, 0);
+  padding: 9px 9px 9px 9px;
   color: #ffffff;
   border: none;
+  border-radius: 5px;
   cursor: pointer;
-  display: inline-block;
 }
 
 .task-content.completed-task {
@@ -26,11 +33,11 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 20px;
-  border: 1px solid red !important;
+  border: 1px solid red;
 }
 
 .task-content {
-  inline-size: 230px;
+  inline-size: 330px;
   white-space: normal;
   overflow-wrap: break-word;
 }
@@ -38,11 +45,49 @@
 .task-checkbox {
   width: 20px;
   margin-right: 10px;
+  margin-left: 70px;
+  cursor: pointer;
+  height: 20px;
+  width: 20px;
+}
+
+.task-checkbox::after {
+  content: "\2713"; /* Unicode checkmark character */
+  font-size: 14px;
+  color: #57a814; /* Color of the checkmark */
+  position: absolute;
+  top: 2px;
+  left: 5px;
+  visibility: hidden;
 }
 
 .completion-status {
-  padding-left: 60px;
-  width: 60px;
+  padding-left: 20px;
+  width: 30px;
   color: red;
   font-weight: 600;
+}
+
+@media screen and (max-width: 991px) {
+  .completion-status {
+    padding-left: 10px;
+  }
+  #tasks {
+    margin: 0 0px 20px 0px;
+    padding: 30px 0 0 0;
+  }
+
+  .task-checkbox {
+    width: 20px;
+    margin-left: 40px;
+  }
+  .user-input {
+    margin-left: 50px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .task-content {
+    inline-size: 150px;
+  }
 }

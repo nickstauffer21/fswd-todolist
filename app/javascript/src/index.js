@@ -27,7 +27,7 @@ function getLatestTask() {
         "</div>\
         <input type='checkbox' id='checkbox_" +
         task.id +
-        "' class='task-checkbox' data-id='" +
+        "' class='task-checkbox custom-checkbox' data-id='" +
         task.id +
         "'" +
         (task.completed ? " checked" : "") +
